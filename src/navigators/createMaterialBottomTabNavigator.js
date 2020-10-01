@@ -29,7 +29,7 @@ class BottomNavigationView extends React.Component {
       descriptors,
       barStyle,
       theme,
-      sendEventForTab,
+      onTabChanged,
       ...rest
     } = this.props;
     const isVisible = this._isVisible();
@@ -47,9 +47,11 @@ class BottomNavigationView extends React.Component {
         barStyle={[barStyle, extraStyle, { backgroundColor: theme.colors.bg }]}
         navigationState={navigation.state}
         getColor={this._getColor}
-        onIndexChange={(index) => {
-          if (sendEventForTab) {
-            sendEventForTab(navigation.state, index);
+        onIndexChange={index => {
+          if (onTabChanged) {
+            const goalId = navigation.state.routes[index].params.goalId;
+            const key = navigation.state.routes[index].key;
+            onTabChanged(key, goalId);
           }
         }}
       />
