@@ -49,9 +49,7 @@ class BottomNavigationView extends React.Component {
         getColor={this._getColor}
         onIndexChange={index => {
           if (onTabChanged) {
-            const goalId = navigation.state.routes[index].params.goalId;
-            const key = navigation.state.routes[index].key;
-            onTabChanged(key, goalId);
+            onTabChanged(navigation.state, index);
           }
         }}
       />
